@@ -7,10 +7,10 @@
             <rawLink>https://archive.org/download/PS4-System-Firmwares/Firmware%209.00/PS4UPDATE.PUP</rawLink>
         </item>
         <item>
-            <name>Game 2</name>
-            <file>game2.zip</file>
-            <description>Description for Game 2</description>
-            <rawLink>https://raw.githubusercontent.com/your_username/repo/master/ps4/game2.zip</rawLink>
+            <name>HB appstore</name>
+            <file>Store-R3.pkg</file>
+            <description>If you are on 9.0.0 and have GoldHEN running download this file and on ps4 install the package file</description>
+            <rawLink>https://pkg-zone.com/Store-R2.pkg</rawLink>
         </item>
         <!-- Add more items as needed -->
     </category>
