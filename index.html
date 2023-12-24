@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Website</title>
+</head>
+<body>
+
+<h1>Categories</h1>
+
+<div id="categories">
+    <script>
+        // Fetch and parse XML data
+        fetch('data.xml')
+            .then(response => response.text())
+            .then(data => {
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(data, 'application/xml');
+
+                const categories = xmlDoc.querySelectorAll('category');
+                categories.forEach(category => {
+                    const categoryName = category.getAttribute('name');
+                    const items = category.querySelectorAll('item');
+                    
+                    // Display category name
+                    document.getElementById('categories').innerHTML += `<h2>${categoryName}</h2>`;
+                    
+                    // Display items
+                    items.forEach(item => {
+                        const itemName = item.querySelector('name').textContent;
+                        const file = item.querySelector('file').textContent;
+                        const description = item.querySelector('description').textContent;
+                        const rawLink = item.querySelector('rawLink').textContent;
+
+                        document.getElementById('categories').innerHTML += `
+                            <div>
+                                <p>Name: ${itemName}</p>
+                                <p>File: ${file}</p>
+                                <p>Description: ${description}</p>
+                                <p>Raw Link: ${rawLink}</p>
+                            </div>
+                        `;
+                    });
+                });
+            });
+    </script>
+</div>
+
+</body>
+</html>
