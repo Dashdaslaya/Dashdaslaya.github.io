@@ -4,9 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Website</title>
+    <title>Hacker Layer</title>
+    <style>
+        #header {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
+            background-size: 200% 200%;
+            color: white;
+            font-size: 24px;
+            animation: glitch 1.5s linear infinite;
+        }
+
+        @keyframes glitch {
+            0% {
+                background-position: 0% 0%;
+            }
+            25% {
+                background-position: 100% 0%;
+            }
+            50% {
+                background-position: 0% 100%;
+            }
+            75% {
+                background-position: 100% 100%;
+            }
+            100% {
+                background-position: 0% 0%;
+            }
+        }
+    </style>
 </head>
 <body>
+
+<div id="header">
+    <h1>Welcome to My Hacker Layer</h1>
+</div>
 
 <h1>Categories</h1>
 
@@ -20,13 +53,16 @@
                 const xmlDoc = parser.parseFromString(data, 'application/xml');
 
                 const categories = xmlDoc.querySelectorAll('category');
+                const categoriesContainer = document.getElementById('categories');
+
                 categories.forEach(category => {
                     const categoryName = category.getAttribute('name');
                     const items = category.querySelectorAll('item');
-                    
-                    // Display category name
-                    document.getElementById('categories').innerHTML += `<h2>${categoryName}</h2>`;
-                    
+
+                    // Create category container
+                    const categoryContainer = document.createElement('div');
+                    categoryContainer.innerHTML = `<h2>${categoryName}</h2>`;
+
                     // Display items
                     items.forEach(item => {
                         const itemName = item.querySelector('name').textContent;
@@ -34,17 +70,29 @@
                         const description = item.querySelector('description').textContent;
                         const rawLink = item.querySelector('rawLink').textContent;
 
-                        document.getElementById('categories').innerHTML += `
+                        // Create item container
+                        const itemContainer = document.createElement('div');
+                        itemContainer.innerHTML = `
                             <div>
                                 <p>Name: ${itemName}</p>
                                 <p>File: ${file}</p>
                                 <p>Description: ${description}</p>
-                                <p>Raw Link: ${rawLink}</p>
+                                <button onclick="downloadFile('${rawLink}')">Download</button>
                             </div>
                         `;
+
+                        categoryContainer.appendChild(itemContainer);
                     });
+
+                    // Append category container to the main container
+                    categoriesContainer.appendChild(categoryContainer);
                 });
             });
+
+        // Function to trigger file download
+        function downloadFile(rawLink) {
+            window.location.href = rawLink;
+        }
     </script>
 </div>
 
