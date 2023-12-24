@@ -3,7 +3,7 @@
         <item>
             <name>9.0.0 update file</name>
             <file>update.pup</file>
-            <description>on your flash drive make a folder called PS4 and under that UPDATE and then copy our file their</description>
+            <description>On your flash drive, make a folder called PS4 and under that UPDATE, then copy our file there.</description>
             <rawLink>https://raw.githubusercontent.com/your_username/repo/master/ps4/game1.zip</rawLink>
         </item>
         <item>
@@ -16,10 +16,11 @@
     </category>
     <category name="rom hacks">
         <item>
-            <name> Super funni world</name>
+            <name>Super funni world</name>
             <file>null.txt</file>
             <description>This game is not real</description>
-            <rawLink>https://you.are.an.idiot.hahahahaahahah</rawLink>
+            <rawLink>https://you.be/@rickroll</rawLink>
+        </item>
     </category>
     <!-- Add more categories as needed -->
 </data>
