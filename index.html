@@ -89,23 +89,29 @@
                 categoriesContainer.appendChild(categoryContainer);
             });
         });
+// Function to trigger file download
+function downloadFile(rawLink) {
+    fetch(rawLink)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch the file.');
+            }
+            return response.blob();
+        })
+        .then(blob => {
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = rawLink.substring(rawLink.lastIndexOf('/') + 1); // Extract filename from URL
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        })
+        .catch(error => alert('Error downloading file: ' + error.message));
+}
 
-    // Function to trigger file download
-    function downloadFile(rawLink) {
-        fetch(rawLink)
-            .then(response => response.blob())
-            .then(blob => {
-                const url = window.URL.createObjectURL(new Blob([blob]));
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = rawLink.substring(rawLink.lastIndexOf('/') + 1); // Extract filename from URL
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(url);
-            })
-            .catch(error => console.error('Error downloading file:', error));
-    }
+
 </script>
 
 </body>
