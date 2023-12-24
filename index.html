@@ -43,58 +43,70 @@
 
 <h1>Categories</h1>
 
-<div id="categories">
-    <script>
-        // Fetch and parse XML data
-        fetch('data.xml')
-            .then(response => response.text())
-            .then(data => {
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(data, 'application/xml');
+<div id="categories"></div>
 
-                const categories = xmlDoc.querySelectorAll('category');
-                const categoriesContainer = document.getElementById('categories');
+<script>
+    // Fetch and parse XML data
+    fetch('data.xml')
+        .then(response => response.text())
+        .then(data => {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(data, 'application/xml');
 
-                categories.forEach(category => {
-                    const categoryName = category.getAttribute('name');
-                    const items = category.querySelectorAll('item');
+            const categories = xmlDoc.querySelectorAll('category');
+            const categoriesContainer = document.getElementById('categories');
 
-                    // Create category container
-                    const categoryContainer = document.createElement('div');
-                    categoryContainer.innerHTML = `<h2>${categoryName}</h2>`;
+            categories.forEach(category => {
+                const categoryName = category.getAttribute('name');
+                const items = category.querySelectorAll('item');
 
-                    // Display items
-                    items.forEach(item => {
-                        const itemName = item.querySelector('name').textContent;
-                        const file = item.querySelector('file').textContent;
-                        const description = item.querySelector('description').textContent;
-                        const rawLink = item.querySelector('rawLink').textContent;
+                // Create category container
+                const categoryContainer = document.createElement('div');
+                categoryContainer.innerHTML = `<h2>${categoryName}</h2>`;
 
-                        // Create item container
-                        const itemContainer = document.createElement('div');
-                        itemContainer.innerHTML = `
-                            <div>
-                                <p>Name: ${itemName}</p>
-                                <p>File: ${file}</p>
-                                <p>Description: ${description}</p>
-                                <button onclick="downloadFile('${rawLink}')">Download</button>
-                            </div>
-                        `;
+                // Display items
+                items.forEach(item => {
+                    const itemName = item.querySelector('name').textContent;
+                    const file = item.querySelector('file').textContent;
+                    const description = item.querySelector('description').textContent;
+                    const rawLink = item.querySelector('rawLink').textContent;
 
-                        categoryContainer.appendChild(itemContainer);
-                    });
+                    // Create item container
+                    const itemContainer = document.createElement('div');
+                    itemContainer.innerHTML = `
+                        <div>
+                            <p>Name: ${itemName}</p>
+                            <p>File: ${file}</p>
+                            <p>Description: ${description}</p>
+                            <button onclick="downloadFile('${rawLink}')">Download</button>
+                        </div>
+                    `;
 
-                    // Append category container to the main container
-                    categoriesContainer.appendChild(categoryContainer);
+                    categoryContainer.appendChild(itemContainer);
                 });
-            });
 
-        // Function to trigger file download
-        function downloadFile(rawLink) {
-            window.location.href = rawLink;
-        }
-    </script>
-</div>
+                // Append category container to the main container
+                categoriesContainer.appendChild(categoryContainer);
+            });
+        });
+
+    // Function to trigger file download
+    function downloadFile(rawLink) {
+        fetch(rawLink)
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(new Blob([blob]));
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = rawLink.substring(rawLink.lastIndexOf('/') + 1); // Extract filename from URL
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => console.error('Error downloading file:', error));
+    }
+</script>
 
 </body>
 </html>
