@@ -2,9 +2,9 @@
     <category name="ps4">
         <item>
             <name>9.0.0 update file</name>
-            <file>update.pup</file>
+            <file>PS4UPDATE.PUP</file>
             <description>On your flash drive, make a folder called PS4 and under that UPDATE, then copy our file there.</description>
-            <rawLink>https://raw.githubusercontent.com/your_username/repo/master/ps4/game1.zip</rawLink>
+            <rawLink>https://archive.org/download/PS4-System-Firmwares/Firmware%209.00/PS4UPDATE.PUP</rawLink>
         </item>
         <item>
             <name>Game 2</name>
