@@ -1,0 +1,18 @@
+<data>
+    <category name="ps4">
+        <item>
+            <name>9.0.0 update file</name>
+            <file>update.pup</file>
+            <description>on your flash drive make a folder called PS4 and under that UPDATE and then copy our file their</description>
+            <rawLink>https://raw.githubusercontent.com/your_username/repo/master/ps4/game1.zip</rawLink>
+        </item>
+        <item>
+            <name>Game 2</name>
+            <file>game2.zip</file>
+            <description>Description for Game 2</description>
+            <rawLink>https://raw.githubusercontent.com/your_username/repo/master/ps4/game2.zip</rawLink>
+        </item>
+        <!-- Add more items as needed -->
+    </category>
+    <!-- Add more categories as needed -->
+</data>
